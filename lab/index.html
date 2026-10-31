@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F7F2E8"><meta name="description" content="Choisissez une pièce et testez des nuances, finitions, éclairages et comparaisons avant et après avec LAMSA LAB.">
+<title>LAMSA LAB — Essayez les couleurs — LAMSA</title>
+<link rel="icon" href="../brand/lamsa-symbol.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../brand/tokens.css"><link rel="stylesheet" href="../lab/lab.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script defer src="../assets/site.js"></script><script defer src="../lab/lab.js"></script>
+</head><body class="page-lab lab-page"><div class="site-wrap"><a class="skip-site" href="#contenu">Aller au contenu</a>
+<header class="topbar">
+  <a class="topbar-logo" href="../index.html" aria-label="LAMSA — Accueil"><img src="../brand/lamsa-wordmark.svg" alt="LAMSA" width="612" height="132"></a>
+  <nav id="siteNav" class="topbar-nav" aria-label="Navigation principale"><a href="../index.html">Accueil</a><a href="../services/">Services</a><a href="../realisations/">Réalisations</a><a href="../a-propos/">À propos</a><a href="../lab/" aria-current="page">LAMSA LAB</a><a href="../devis/" class="nav-quote">Demander un devis</a></nav>
+  <span class="nav-location">TÉTOUAN / MA</span>
+  <button class="menu-toggle" type="button" aria-controls="siteNav" aria-expanded="false"><span class="menu-glyph" aria-hidden="true"></span>MENU</button>
+</header>
+<main id="contenu"><div class="section-topline"><span class="number">01 /</span><span>LAMSA LAB / INTERACTIF</span><i aria-hidden="true"></i><span>SCÈNES INTÉGRÉES / SANS UPLOAD</span></div>
+<section class="lab" id="atelier" aria-labelledby="lab-title">
+        <div class="section-rule"><span class="eyebrow"><span class="index-marker">02 /</span> LAMSA LAB</span><span class="line"></span><span class="eyebrow index-right">EXPÉRIENCE INTERACTIVE / 001</span></div>
+        <div class="lab-head">
+          <div>
+            <span class="eyebrow">LE LABORATOIRE DES SURFACES</span>
+            <h1 id="lab-title">Un lieu.<br><em>Mille nuances.</em></h1>
+          </div>
+          <p>Choisissez une pièce. Touchez un mur. Testez la couleur, la matière et la lumière — en direct, sans télécharger de photo.</p>
+        </div>
+        <div class="lab-workspace">
+          <div class="visual-panel">
+            <div class="visual-toolbar">
+              <div class="scene-switch" role="group" aria-label="Choisir une pièce">
+                <button type="button" data-room="salon" aria-pressed="true">01 <span>Salon</span></button>
+                <button type="button" data-room="chambre" aria-pressed="false">02 <span>Chambre</span></button>
+                <button type="button" data-room="boutique" aria-pressed="false">03 <span>Boutique</span></button>
+              </div>
+              <span class="visual-tag"><span class="pulse-dot" aria-hidden="true"></span>APERÇU EN DIRECT</span>
+            </div>
+            <div class="scene-frame" id="sceneFrame">
+              <svg id="roomScene" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 650" role="group" aria-label="Visualisation d'une pièce avec murs personnalisables" preserveAspectRatio="xMidYMid meet">
+                <title>Visualisation interactive des couleurs LAMSA</title>
+                <desc>Choisissez un mur avec la souris, le doigt ou le clavier, puis choisissez une couleur.</desc>
+              </svg>
+              <div class="scene-legend" aria-hidden="true"><span class="legend-dot"></span>TOUCHEZ UN MUR · GLISSEZ LA CÉSURE</div>
+              <div class="comparison-tags" aria-hidden="true"><span>AVANT</span><span>APRÈS</span></div>
+            </div>
+            <div class="comparison-control">
+              <label for="compareRange">Comparateur avant / après</label>
+              <input id="compareRange" type="range" min="0" max="100" value="0" step="1" aria-label="Pourcentage de l'image avant affiché à gauche">
+              <output id="compareOutput" for="compareRange">Après · 100%</output>
+            </div>
+          </div>
+
+          <aside class="control-panel" aria-label="Personnalisation de la pièce">
+            <div class="control-head"><span class="eyebrow">ATELIER / COMMANDES</span><span class="eyebrow">02 — 04</span></div>
+            <div class="control-section wall-control">
+              <div class="control-title"><span class="control-number">01</span><h3>Choisissez votre surface</h3></div>
+              <div class="wall-buttons" role="group" aria-label="Mur à modifier">
+                <button type="button" data-wall-button="main" aria-pressed="true"><span class="wall-icon main-wall" aria-hidden="true"></span>Mur principal</button>
+                <button type="button" data-wall-button="side" aria-pressed="false"><span class="wall-icon side-wall" aria-hidden="true"></span>Mur latéral</button>
+              </div>
+            </div>
+            <div class="control-section">
+              <div class="control-title"><span class="control-number">02</span><h3>La couleur</h3></div>
+              <div class="color-selection"><span id="selectedColorName">Argile</span><span id="selectedColorCode">#C6785B</span></div>
+              <div class="swatches" role="group" aria-label="Nuances disponibles" id="swatches"></div>
+              <div class="harmonies-heading"><span>ACCORDS LAMSA</span><small>Deux murs, une intention.</small></div>
+              <div class="harmonies" role="group" id="harmonies" aria-label="Harmonies de couleurs coordonnées"></div>
+              <div class="personal-color"><label for="customColor">Votre propre nuance</label><input id="customColor" type="color" value="#C6785B" aria-label="Choisir une couleur personnalisée"><span aria-hidden="true">↗</span></div>
+            </div>
+            <div class="control-section">
+              <div class="control-title"><span class="control-number">03</span><h3>La finition</h3></div>
+              <div class="segmented" role="group" aria-label="Finition du mur"><button type="button" data-finish="mat" aria-pressed="true">Mat</button><button type="button" data-finish="velours" aria-pressed="false">Velours</button><button type="button" data-finish="mineral" aria-pressed="false">Minérale</button></div>
+              <p class="finish-description" id="finishDescription">Une surface douce et mate, à l’aspect uniforme.</p>
+            </div>
+            <div class="control-section lighting-control">
+              <div class="control-title"><span class="control-number">04</span><h3>La lumière</h3></div>
+              <div class="segmented light-options" role="group" aria-label="Éclairage de la pièce"><button type="button" data-light="jour" aria-pressed="true">☼ &nbsp;Jour</button><button type="button" data-light="soir" aria-pressed="false">◔ &nbsp;Soir</button></div>
+            </div>
+            <div class="action-stack"><button id="downloadBtn" type="button" class="primary-action">Enregistrer mon ambiance <span aria-hidden="true">↗</span></button><div class="secondary-actions"><button id="shareBtn" type="button">Partager <span aria-hidden="true">↗</span></button><button id="resetBtn" type="button">Recommencer <span aria-hidden="true">↶</span></button></div></div>
+            <p class="action-feedback" role="status" id="actionFeedback" aria-live="polite"></p>
+          </aside>
+        </div>
+        <div class="lab-footnotes"><p>01 — Simulation indicative : les couleurs affichées dépendent de votre écran et de la lumière réelle.</p><p>02 — Trois pièces intégrées. Aucune photo ni donnée personnelle requise.</p></div>
+      </section>
+      
+<section class="next-band"><div><span class="smallcaps">DE LA COULEUR À L’ESPACE</span><h2 class="display">Faites votre choix.</h2><p>Les teintes à l’écran sont indicatives. Un vrai projet se construit avec les surfaces, les matériaux et la lumière du lieu.</p></div><a href="../services/" class="action-link">Découvrir nos prestations <span aria-hidden="true">↗</span></a></section></main><footer class="site-footer"><div class="footer-main"><div>
+    <a href="../index.html" aria-label="LAMSA — retour à l’accueil"><img src="../brand/lamsa-wordmark-white.svg" width="612" height="132" alt="LAMSA"></a>
+    <p class="footer-claim">Donnez vie à vos espaces.</p><p class="smallcaps" style="color:#A2D7D0">PEINTURE · DÉCORATION · FINITIONS / TÉTOUAN</p></div>
+    <nav class="footer-links" aria-label="Navigation de bas de page"><a href="../services/">Services</a><a href="../realisations/">Études d’ambiances</a><a href="../a-propos/">À propos</a><a href="../lab/">LAMSA LAB</a><a href="../devis/">Devis</a><a href="../index.html">Accueil</a></nav></div>
+    <div class="footer-bottom"><span>© LAMSA — PROJET CONCEPT / TÉTOUAN, MAROC</span><span>IDENTITÉ & SITE CONÇUS PAR <a href="https://www.pfxamd.com" rel="noopener noreferrer">PFXAMD</a></span></div></footer></div></body></html>

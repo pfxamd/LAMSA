@@ -27,12 +27,12 @@
 | --- | --- | --- | --- |
 | **01 — Brand Identity** | **Base livrée** | [Charte](brand/BRAND.md), [aperçu](brand/preview.html), [SVG](brand/lamsa-wordmark.svg) | Direction d'identité documentée avec logo vectoriel, palette et signature |
 | **02 — LAMSA LAB** | **Terminé : moteur et prototype contrôlés en Chromium** | [Issue #1](https://github.com/pfxamd/LAMSA/issues/1) | Scènes, couleurs, finitions, éclairages, export et mobile revus/validés |
-| **03 — Website Design & Development** | À faire | [Issue #2](https://github.com/pfxamd/LAMSA/issues/2) | Site français multi-pages, identité forte, parcours de navigation réel |
+| **03 — Website Design & Development** | **Livré en code : 6 pages françaises intégrées** | [Issue #2](https://github.com/pfxamd/LAMSA/issues/2) | Site français multi-pages, identité forte, parcours de navigation réel |
 | **04 — Commercial Features** | À faire | [Issue #3](https://github.com/pfxamd/LAMSA/issues/3) | Services, réalisations, devis et parcours commercial fonctionnels |
 | **05 — Quality Assurance** | À faire | [Issue #4](https://github.com/pfxamd/LAMSA/issues/4) | Vérifications visuelles et techniques documentées, pas de défaut critique |
 | **06 — Launch & Case Study** | À faire | [Issue #5](https://github.com/pfxamd/LAMSA/issues/5) | Lien public réellement vérifié + présentation du Concept sur PFXAMD |
 
-**Progression suivie par jalons : 2 phases livrées sur 6 ; la phase 03 est la prochaine.** Ce ratio n'est pas un pourcentage de code achevé.
+**Progression suivie par jalons : 3 phases livrées sur 6 ; la phase 04 est la prochaine.** Ce ratio n'est pas un pourcentage de code achevé.
 
 ## Livrables déjà présents dans GitHub
 
@@ -40,7 +40,7 @@
 - [`brand/preview.html`](brand/preview.html) — planche de marque responsive.
 - [`brand/lamsa-wordmark.svg`](brand/lamsa-wordmark.svg) et [`brand/lamsa-symbol.svg`](brand/lamsa-symbol.svg) — graphismes vectoriels originaux, plus variantes.
 - [`brand/tokens.css`](brand/tokens.css) — palette et variables.
-- [`index.html`](index.html) — interface actuelle de la marque et du laboratoire, **pas encore le site commercial final**.
+- [`index.html`](index.html) — page d’accueil, avec illustration de surface à 4 ambiances interactives.
 - [`lab/lab.js`](lab/lab.js) et [`lab/lab.css`](lab/lab.css) — moteur interactif sans serveur ni upload.
 - [`lab/README.md`](lab/README.md) — documentation des capacités et limites.
 
@@ -59,6 +59,14 @@
 
 **Limite explicite :** les pièces sont des dessins 2D et les effets sont indicatifs, non photoréalistes ni une correspondance colorimétrique certifiée.
 
+## Livraison de la phase 03
+
+- Pages réelles : [`Accueil`](index.html), [`Services`](services/), [`Réalisations`](realisations/), [`À propos`](a-propos/), [`LAMSA LAB`](lab/) et [`Devis`](devis/).
+- Identité La Césure, navigation et pied de page communs, illustrations géométriques codées et interactions locales.
+- LAB phase 02 préservé sans modifier son moteur ; accessible par une route dédiée.
+- Devis : récapitulatif copiable **sans envoi** (intégration commerciale en phase 04).
+- [Contrôles de structure de la phase 03](tests/PHASE3.md) — 6 pages, liens internes, éléments sémantiques et syntaxe du JavaScript. Vérification visuelle multi-navigateurs **non accomplie**, prévue en phase 05.
+
 ## Historique vérifiable
 
 - [`815346f9`](https://github.com/pfxamd/LAMSA/commit/815346f9fd9aad36af65c2370d894c4434609bf7) — première direction de marque, charte et SVG.
@@ -69,7 +77,7 @@
 
 ## Prochaine action unique
 
-**Phase 03 — Construire le site français complet : [Issue #2](https://github.com/pfxamd/LAMSA/issues/2).** Conserver le LAMSA LAB validé et bâtir les pages commerciales autour de l'identité La Césure. Les vérifications Safari/Firefox et les tests sur appareils physiques relèvent de la phase 05.
+**Phase 04 — Connecter le parcours commercial : [Issue #3](https://github.com/pfxamd/LAMSA/issues/3).** Remplacer le brouillon de devis local par une demande réellement transmissible au canal choisi et vérifier les données commerciales. Les essais visuels inter-navigateurs et appareils physiques restent en phase 05.
 
 ## Règles de suivi
 
