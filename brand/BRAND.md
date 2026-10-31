@@ -1,4 +1,6 @@
-# LAMSA — Identité de marque / Direction 01
+# LAMSA — Identité de marque / Fondations de la marque
+
+> **Note (2026-10-31) :** ce document conserve l'histoire du logo et des choix de marque. Pour l'**interface web actuelle**, la direction validée et prioritaire est [Living Surfaces](../DESIGN_DIRECTION.md). Les prescriptions historiques de typographie condensée, de composition éditoriale, de numéros et de séparateurs ne s'appliquent plus au site. Ne pas restaurer « La Césure » comme direction générale du web.
 
 **Signature officielle :** Donnez vie à vos espaces.
 
@@ -12,7 +14,7 @@
 
 Une seule intervention transforme la lecture de toute une surface. L'identité exprime ce basculement par une **césure horizontale précise** : les lettres sont séparées, une fine trace contrastée apparaît et leur base est légèrement décalée.
 
-Cette grammaire s'applique à la typographie, au cadrage des photographies, aux marquages de véhicules, à la signalétique et aux transitions du futur site. Ce n'est ni un pinceau, ni une goutte de peinture, ni un dégradé décoratif.
+Cette grammaire décrit les origines du logotype et certaines applications imprimées. Elle ne dicte plus la composition des pages web depuis l'adoption de « Living Surfaces ». Ce n'est ni un pinceau, ni une goutte de peinture, ni un dégradé décoratif.
 
 ## Palette
 
@@ -45,7 +47,7 @@ Pas de dégradés multicolores, d'arcs-en-ciel ou de palettes de peintures utili
 - Descripteur : **Peinture · Décoration · Finitions**.
 - Phrase d'accueil possible : **Une nouvelle vie pour vos murs.**
 
-## Application web / Direction 01
+## Application web / Direction 01 — historique du prototype
 
 Le prototype interactif [LAMSA LAB](../index.html) applique les mêmes proportions, couleurs et motifs. **La césure** fonctionne comme un masque avant/après sur les surfaces : ce n’est pas un simple effet décoratif, mais le point d’interaction du produit.
 
@@ -55,7 +57,7 @@ Le prototype interactif [LAMSA LAB](../index.html) applique les mêmes proportio
 - Interface mobile/desktop en français, sans photographie fournie par l’utilisateur.
 - Illustrations et textures interprétatives, jamais présentées comme un rendu colorimétrique exact.
 
-## Typographie et rythme
+## Typographie et rythme — règles historiques, remplacées pour le site web
 
 - Le logotype est une **géométrie SVG originale**, jamais une police de substitution.
 - Titres d’exposition condensés, nets et denses ; les titres sont en capitales lorsque cela sert la hiérarchie.
