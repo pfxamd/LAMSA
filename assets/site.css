@@ -60,3 +60,88 @@ a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}b
   .case-visual .study-sofa-stage picture{width:81%;left:10%;bottom:11%}
   .case-visual .study-sofa-shadow{left:15%;width:75%;bottom:10%}
 }
+
+
+/* Salon / Jardin — room material pass. Keep the sofa ABOVE the before/after wipe,
+   while architecture, artwork and lighting belong to BOTH color states. */
+.case-visual .study-shot[data-study="salon"]{
+  --floor-oak:#c4a98b;
+  background:#d9c8b0;
+}
+/* Wall tone is still supplied by the existing comparison system. Gradients add
+   directional daylight and gentle wall plaster without replacing chosen colors. */
+.case-visual .study-shot[data-study="salon"] .study-wall{
+  box-shadow:inset -55px -28px 100px rgba(23,38,38,.10);
+}
+.case-visual .study-shot[data-study="salon"] .study-wall::before{
+  box-shadow:inset -22px 0 48px rgba(30,35,30,.18);
+}
+.case-visual .study-shot[data-study="salon"] .study-wall::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 78% at 16% 3%,rgba(255,252,233,.25),transparent 82%),
+    linear-gradient(117deg,rgba(255,255,255,.045),transparent 48%,rgba(19,36,40,.16) 100%);
+}
+/* Warm pale-oak boards: small seam variance plus fine grain, retaining the
+   original floor geometry for the two different paint states. */
+.case-visual .study-shot[data-study="salon"] .study-floor{
+  background-color:var(--floor-oak);
+  background-image:
+    linear-gradient(180deg,rgba(88,70,54,.14),transparent 27%),
+    repeating-linear-gradient(1.9deg,transparent 0 90px,rgba(103,79,56,.15) 91px,rgba(255,250,227,.12) 92px,transparent 94px 181px),
+    linear-gradient(107deg,rgba(255,251,234,.1) 0%,transparent 38%,rgba(73,54,38,.08) 100%),
+    linear-gradient(115deg,#d6bea0 0%,#d2b99a 46%,#b1997f 100%);
+}
+.case-visual .study-shot[data-study="salon"] .study-floor::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 52% 64% at 30% 15%,rgba(255,250,218,.36),transparent 85%),
+    linear-gradient(169deg,rgba(255,255,255,.06),rgba(53,38,24,.17));
+}
+/* A physical white-painted skirting board follows the existing sloping
+   wall-floor join; it never passes in front of the sofa. */
+.case-visual .study-shot[data-study="salon"] .study-skirting{
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,#f9f1dd 0%,#e6d8c1 46%,#a18d75 100%);
+  clip-path:polygon(0 70.2%,100% 82.1%,100% 83.2%,0 71.4%);
+  filter:drop-shadow(0 2px 2px rgba(52,46,39,.2));
+}
+/* The old empty rectangle is now a single framed painting: shallow oak moulding,
+   cream passe-partout and a restrained pigment composition drawn in CSS. */
+.case-visual .study-shot[data-study="salon"] .study-mark{
+  top:10.7%;right:13.7%;width:29.7%;height:29%;
+  border:7px solid #bfa888;
+  background:
+    radial-gradient(ellipse 39% 72% at 75% 78%,rgba(118,132,104,.65) 0 55%,transparent 57%),
+    radial-gradient(ellipse 30% 58% at 46% 48%,rgba(161,120,95,.57) 0 50%,transparent 53%),
+    linear-gradient(128deg,transparent 47%,#ab9982 47.5%,#ab9982 49%,transparent 50%),
+    linear-gradient(116deg,#f3e8d7 0%,#eee2d2 51%,#d7c6b5 100%);
+  box-shadow:
+    0 0 0 2px #ecdfc8 inset,
+    0 0 0 11px #f3e9d9 inset,
+    1px 3px 3px rgba(28,40,40,.24),
+    12px 17px 21px rgba(24,38,38,.27);
+  transform:skewY(5deg);
+}
+.case-visual .study-shot[data-study="salon"] .study-mark::before{
+  content:"";position:absolute;inset:7px;pointer-events:none;
+  border:1px solid rgba(69,59,52,.20);
+  box-shadow:inset 4px 4px 9px rgba(52,43,37,.11);
+}
+.case-visual .study-shot[data-study="salon"] .study-mark::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(117deg,rgba(255,255,255,.29),transparent 42%,rgba(40,36,31,.09));
+  border-right:2px solid rgba(111,85,60,.16);
+}
+/* The photographed upholstery stays unchanged, but its grounding shadow is
+   quieter and spreads along the floor instead of resembling a floating halo. */
+.case-visual .study-shot[data-study="salon"] > .study-sofa-stage .study-sofa-shadow{
+  bottom:8.9%;height:9%;
+  background:radial-gradient(ellipse at 50% 62%,rgba(53,41,27,.38),rgba(53,41,27,.18) 46%,transparent 77%);
+  filter:blur(8px);
+}
+@media(max-width:450px){
+  .case-visual .study-shot[data-study="salon"] .study-mark{
+    border-width:4px;box-shadow:0 0 0 7px #f3e9d9 inset,5px 8px 13px rgba(24,38,38,.2);
+  }
+}
