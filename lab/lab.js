@@ -65,6 +65,9 @@
   const custom = document.querySelector('#customColor');
   const compareRange = document.querySelector('#compareRange');
   const compareOutput = document.querySelector('#compareOutput');
+  const sceneFrame = document.querySelector('#sceneFrame');
+  const sceneScrub = document.querySelector('#sceneScrubHandle');
+  const comparisonPresets = [...document.querySelectorAll('[data-compare-preset]')];
   const feedback = document.querySelector('#actionFeedback');
   const colorName = document.querySelector('#selectedColorName');
   const colorCode = document.querySelector('#selectedColorCode');
@@ -215,7 +218,13 @@
     if (handle) {
       handle.setAttribute('transform', `translate(${Math.max(32, Math.min(928, state.compare * 9.6))} 0)`);
     }
-    compareOutput.textContent = state.compare === 0 ? 'Après · 100%' : state.compare === 100 ? 'Avant · 100%' : `Avant · ${state.compare}%`;
+    compareOutput.textContent = state.compare === 0 ? 'Après · 100%' : state.compare === 100 ? 'Avant · 100%' : `Avant ${state.compare}% · Après ${100 - state.compare}%`;
+    compareRange.style.setProperty('--before-ratio', `${state.compare}%`);
+    if (sceneFrame) {
+      sceneFrame.dataset.compare = state.compare === 0 ? 'after' : state.compare === 100 ? 'before' : 'split';
+      sceneFrame.style.setProperty('--split-position', `${state.compare}%`);
+    }
+    for (const button of comparisonPresets) button.setAttribute('aria-pressed', String(Number(button.dataset.comparePreset) === state.compare));
   }
 
   function renderScene() {
@@ -223,8 +232,7 @@
       <line id="comparisonLine" x1="0" x2="0" y1="0" y2="650" stroke="#F7F2E8" stroke-width="5" opacity="0" pointer-events="none"/>
       <g id="comparisonHandle" transform="translate(0 0)" aria-hidden="true">
         <rect id="comparisonHitArea" x="-42" y="60" width="84" height="525" fill="transparent" pointer-events="all" style="cursor:ew-resize;touch-action:none"/>
-        <circle cx="0" cy="327" r="32" fill="#F7F2E8" stroke="#1D3135" stroke-width="3" pointer-events="none"/>
-        <path d="M-14 327 H14 M-10 321 L-16 327 L-10 333 M10 321 L16 327 L10 333" fill="none" stroke="#1D3135" stroke-width="3" stroke-linecap="round" pointer-events="none"/>
+        <!-- Visible handle is a touch-sized HTML overlay. -->
       </g>`;
     scene.setAttribute('aria-label', `${roomNames[state.room]}, deux surfaces personnalisables : mur principal et mur latéral`);
     updateComparison();
@@ -295,6 +303,12 @@
   scene.addEventListener('keydown', (event) => { if (event.key !== 'Enter' && event.key !== ' ') return; const target = event.target.closest('[data-wall]'); if (!target) return; event.preventDefault(); state.selectedWall = target.dataset.wall; render(); scene.querySelector(`[data-wall="${state.selectedWall}"]`)?.focus(); });
   custom.addEventListener('input', () => setColor(custom.value));
   compareRange.addEventListener('input', updateComparison);
+  for (const button of comparisonPresets) {
+    button.addEventListener('click', () => {
+      compareRange.value = button.dataset.comparePreset;
+      updateComparison();
+    });
+  }
   // The on-image split is draggable on touch and mouse; the native range remains
   // the accessible keyboard alternative (including Arrow/Home/End keys).
   let draggingComparison = false;
@@ -312,6 +326,23 @@
     event.preventDefault();
   });
   scene.addEventListener('pointermove', (event) => { if (draggingComparison) setCompareAtClientX(event.clientX); });
+  // A fixed-size touch grip, independent of SVG scaling.
+  if (sceneScrub) {
+    let scrubPointer = null;
+    sceneScrub.addEventListener('pointerdown', (event) => {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      scrubPointer = event.pointerId;
+      sceneScrub.setPointerCapture(event.pointerId);
+      event.preventDefault();
+    });
+    sceneScrub.addEventListener('pointermove', (event) => {
+      if (scrubPointer === event.pointerId) setCompareAtClientX(event.clientX);
+    });
+    const finishScrub = () => { scrubPointer = null; };
+    sceneScrub.addEventListener('pointerup', finishScrub);
+    sceneScrub.addEventListener('pointercancel', finishScrub);
+    sceneScrub.addEventListener('lostpointercapture', finishScrub);
+  }
   const endComparisonDrag = () => { draggingComparison = false; };
   scene.addEventListener('pointerup', endComparisonDrag);
   scene.addEventListener('pointercancel', endComparisonDrag);

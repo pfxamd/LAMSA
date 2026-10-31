@@ -5,6 +5,7 @@
 <link rel="icon" href="../brand/lamsa-symbol.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../brand/tokens.css"><link rel="stylesheet" href="../lab/lab.css">
 <link rel="stylesheet" href="../assets/site.css?v=living-surfaces-nav-centered-2">
+<link rel="stylesheet" href="../lab/ux.css?v=lab-ux-1">
 <script defer src="../assets/site.js"></script><script defer src="../lab/lab.js"></script>
 </head><body class="page-lab lab-page"><div class="site-wrap"><a class="skip-site" href="#contenu">Aller au contenu</a>
 <header class="topbar"><div class="topbar-inner"><a class="topbar-logo" href="../index.html" aria-label="LAMSA — Accueil"><img src="../brand/lamsa-wordmark.svg" width="612" height="132" alt="LAMSA"></a><nav id="siteNav" class="topbar-nav" aria-label="Navigation principale"><a href="../index.html" >Accueil</a><a href="../services/" >Services</a><a href="../realisations/" >Réalisations</a><a href="../a-propos/" >À propos</a><a href="../lab/" class="nav-lab" aria-current="page">LAMSA LAB</a><a href="../devis/" class="nav-quote" >Parlons de votre projet <span aria-hidden="true">↗</span></a></nav><button class="menu-toggle" type="button" aria-controls="siteNav" aria-expanded="false" aria-label="Ouvrir le menu"><span class="menu-glyph" aria-hidden="true"></span><span class="menu-text">Menu</span></button></div></header>
@@ -33,13 +34,24 @@
                 <title>Visualisation interactive des couleurs LAMSA</title>
                 <desc>Choisissez un mur avec la souris, le doigt ou le clavier, puis choisissez une couleur.</desc>
               </svg>
-              <div class="scene-legend" aria-hidden="true"><span class="legend-dot"></span>Touchez un mur, glissez pour comparer</div>
+              <div class="scene-scrub-handle" id="sceneScrubHandle" aria-hidden="true"><span class="scrub-arrow scrub-left">‹</span><span class="scrub-arrow scrub-right">›</span></div><div class="scene-legend" aria-hidden="true"><span class="legend-dot"></span>Touchez un mur pour changer sa couleur</div>
               <div class="comparison-tags" aria-hidden="true"><span>AVANT</span><span>APRÈS</span></div>
             </div>
-            <div class="comparison-control">
-              <label for="compareRange">Comparateur avant / après</label>
-              <input id="compareRange" type="range" min="0" max="100" value="0" step="1" aria-label="Pourcentage de l'image avant affiché à gauche">
-              <output id="compareOutput" for="compareRange">Après · 100%</output>
+            <div class="comparison-control" aria-label="Comparer avant et après">
+              <div class="comparison-heading">
+                <div class="comparison-title"><strong>Avant &amp; après</strong><span>Voyez ce que la couleur change.</span></div>
+                <div class="comparison-tools"><output id="compareOutput" for="compareRange" aria-live="off">Après · 100%</output><button type="button" class="compare-split" data-compare-preset="50" aria-pressed="false" title="Afficher les deux versions">Vue partagée</button></div>
+              </div>
+              <div class="comparison-scrubber">
+                <button type="button" class="compare-edge" data-compare-preset="100" aria-pressed="false">Avant</button>
+                <div class="comparison-slider-wrap"><label class="sr-only" for="compareRange">Part de la version avant affichée à gauche</label><input id="compareRange" type="range" min="0" max="100" value="0" step="1" aria-label="Part de la version avant affichée à gauche"></div>
+                <button type="button" class="compare-edge" data-compare-preset="0" aria-pressed="true">Après</button>
+              </div>
+              <p class="comparison-help">Glissez le repère dans l'image ou déplacez le curseur.</p>
+            </div>
+            <div class="wall-summary" aria-label="Couleurs des surfaces">
+              <button type="button" class="wall-summary-item" data-wall-button="main" aria-pressed="true" title="Modifier le mur principal"><span class="wall-summary-chip" id="visualMainSample"></span><span class="wall-summary-info"><span>Mur principal</span><strong id="visualMainColor">#C6785B</strong></span></button>
+              <button type="button" class="wall-summary-item" data-wall-button="side" aria-pressed="false" title="Modifier le mur latéral"><span class="wall-summary-chip" id="visualSideSample"></span><span class="wall-summary-info"><span>Mur latéral</span><strong id="visualSideColor">#EAE5D9</strong></span></button>
             </div>
           </div>
 
