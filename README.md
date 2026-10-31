@@ -12,6 +12,12 @@ Concept original PFXAMD d’une entreprise de peinture, décoration et finitions
 - [Logotype vectoriel](brand/lamsa-wordmark.svg), [symbole](brand/lamsa-symbol.svg) et [tokens](brand/tokens.css)
 - [Documentation technique du LAB](lab/README.md)
 
+## Suivi du projet
+
+**[Feuille de route — 6 phases, état réel, critères de validation et prochaines actions](ROADMAP.md)**
+
+Les tâches restantes sont suivies dans les [Issues GitHub](https://github.com/pfxamd/LAMSA/issues). Phase active : **02 — Finaliser LAMSA LAB**.
+
 ## Lancer en local
 
 ```sh
