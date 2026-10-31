@@ -4,6 +4,8 @@
 
 Concept PFXAMD d'un site de peinture, décoration et finitions à Tétouan. Site en français, direction visuelle « Living Surfaces », sans dépendances externes ou service payant.
 
+**Direction visuelle approuvée (règle du projet) :** [Living Surfaces — DESIGN_DIRECTION.md](DESIGN_DIRECTION.md). L'ancien langage éditorial « La Césure », ses titres de magazine et sa numérotation ne doivent pas être restaurés lors des travaux ultérieurs. Le logo et les fonctionnalités existantes sont préservés.
+
 ## Pages
 
 | Page | Dossier | Rôle |
