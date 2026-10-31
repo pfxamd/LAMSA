@@ -7,8 +7,10 @@ Studio interactif de couleurs et finitions, réalisé en SVG, CSS et JavaScript 
 - Trois scènes illustrées en SVG : salon, chambre et boutique.
 - Deux surfaces sélectionnables par pièce, au toucher, à la souris et au clavier.
 - 12 nuances prédéfinies + sélecteur de couleur libre.
+- 4 harmonies originales appliquées simultanément aux deux murs.
 - Finitions mat, velours, minérale (interprétation graphique, non photométrique).
-- Éclairages jour et soir ; comparaison avant/après au curseur.
+- Éclairages jour et soir avec lumière directionnelle ; textures et ombrages révisés pour mieux distinguer les finitions.
+- Comparaison avant/après au curseur natif et avec une poignée de césure glissable dans la scène.
 - Export PNG 1440 × 975, lien partageable reproduisant les choix.
 - Interface française, responsive, sans données personnelles.
 

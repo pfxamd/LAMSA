@@ -4,3 +4,22 @@
 @media(max-width:600px){.site-header{height:65px}.logo-link{width:118px}.header-index{font-size:9px}.opening{min-height:auto;display:block;padding-top:56px;padding-bottom:57px}.opening h1{font-size:clamp(56px,12.2vw,82px);margin-top:24px}.intro-aside{margin:40px 0 0;max-width:370px}.intro-aside>p{margin-top:8px}.opening-cross-one{right:16%;top:25px}.opening-cross-two{display:none}.section-rule{gap:10px}.index-right{font-size:8px}.lab-head{display:block;padding-top:40px}.lab-head h2{font-size:clamp(52px,11.4vw,75px)}.lab-head p{max-width:400px;margin-top:19px}.lab-workspace{margin:0 12px}.visual-toolbar{padding:8px 12px;min-height:64px}.scene-switch{gap:12px}.scene-switch button{font-size:9px}.scene-switch button span{font-size:12px}.scene-frame{min-height:255px}.scene-frame svg{min-height:240px}.scene-legend{font-size:8px;left:10px;bottom:10px;padding:8px}.comparison-tags{top:8px;left:8px;right:8px;font-size:8px}.comparison-control{padding:14px;gap:6px}.comparison-control label{font-size:10px}.comparison-control output{font-size:9px}.control-panel{display:block;padding:0 18px 22px}.control-head{height:53px}.control-section:nth-of-type(2){grid-column:auto;grid-row:auto}.wall-buttons button{min-height:48px}.swatches{grid-template-columns:repeat(6,1fr);gap:8px}.swatches button{height:42px}.lab-footnotes{padding:14px 22px 64px}.closing-content h2{font-size:clamp(52px,11.7vw,76px)}.closing-content img{width:66px}.closing>p{margin-bottom:60px}.closing-bottom{font-size:10px}}
 @media(max-width:375px){.header-index{font-size:0}.header-index span:last-child{font-size:20px}.opening h1{font-size:12vw}.scene-switch{gap:7px}.scene-switch button span{font-size:11px}.wall-buttons button{font-size:10px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* Phase 02 — paired architectural harmonies and a tactile comparison seam. */
+.harmonies-heading{display:flex;align-items:baseline;justify-content:space-between;gap:9px;margin:18px 0 10px;font:700 10px/1.4 ui-monospace,monospace;letter-spacing:.07em}
+.harmonies-heading small{color:#647676;font:400 10px/1.4 Arial,sans-serif;letter-spacing:0}
+.harmonies{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.harmony-choice{min-width:0;padding:5px 5px 8px;border:1px solid #C9D0C7;background:#F7F2E8;color:var(--lamsa-ink);text-align:left;display:grid;gap:6px;transition:border-color 160ms ease,background 160ms ease}
+.harmony-choice:hover{border-color:var(--lamsa-ink)}
+.harmony-choice[aria-pressed="true"]{outline:2px solid var(--lamsa-signature);outline-offset:1px;border-color:var(--lamsa-signature)}
+.harmony-tiles{height:31px;display:grid;grid-template-columns:2fr 1fr;transform:skewX(-9deg);overflow:hidden}
+.harmony-tiles i{display:block}
+.harmony-name{font-size:10px;font-weight:650;overflow-wrap:anywhere}
+.scene-frame:has(#comparisonHandle:not([style*="display: none"])) .scene-legend{opacity:.35}
+@media(min-width:880px) and (max-width:1060px){.harmonies{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.harmonies{gap:8px}.harmony-choice{min-height:64px;padding:6px}.harmony-tiles{height:30px}.harmony-name{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.harmony-choice{transition:none}}
+
+/* Selection is indicated by the precision pin, not a distracting dashed perimeter. */
+.wall-paint[aria-pressed="true"]{stroke:color-mix(in srgb,var(--lamsa-signature) 24%,transparent);stroke-width:2;stroke-dasharray:none}
+.wall-paint:is(:hover,:focus){stroke:var(--lamsa-signature);stroke-width:4;stroke-dasharray:12 10}

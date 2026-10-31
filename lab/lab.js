@@ -17,6 +17,13 @@
     { name: 'Terracotta', hex: '#9F523C' },
     { name: 'Écorce', hex: '#65584F' },
   ];
+  // Architectural harmonies are pairs, not single paint swatches.
+  const harmonies = [
+    { id: 'lumiere', name: 'Lumière', note: 'Chaux + lin', main: '#EAE5D9', side: '#C7BCA8' },
+    { id: 'jardin', name: 'Jardin', note: 'Sauge + ivoire', main: '#78947E', side: '#E9DCC5' },
+    { id: 'atelier', name: 'Atelier', note: 'Pétrole + argile', main: '#355761', side: '#C6785B' },
+    { id: 'terre', name: 'Terre', note: 'Ocre + sable', main: '#BF824D', side: '#DECBAF' },
+  ];
   const roomNames = { salon: 'Salon', chambre: 'Chambre', boutique: 'Boutique' };
   const defaultWalls = {
     salon: { main: '#C6785B', side: '#EAE5D9' },
@@ -62,6 +69,7 @@
   const colorName = document.querySelector('#selectedColorName');
   const colorCode = document.querySelector('#selectedColorCode');
   const finishDescription = document.querySelector('#finishDescription');
+  const harmoniesPanel = document.querySelector('#harmonies');
   if (!scene || !swatches || !custom || !compareRange || !compareOutput) return;
 
   const escapeText = (s) => String(s).replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;');
@@ -130,9 +138,20 @@
 
   function defs() {
     return `<defs>
-      <pattern id="lamsa-mineral" width="23" height="19" patternUnits="userSpaceOnUse"><circle cx="3" cy="5" r="1" fill="#fff" opacity=".25"/><circle cx="12" cy="15" r="1.8" fill="#283c3c" opacity=".15"/><path d="M14 3 l4 1 M2 18 l5 -2" stroke="#fff" stroke-width=".7" opacity=".4"/></pattern>
-      <linearGradient id="lamsa-velours" x1="0" y1="0" x2="1" y2=".7"><stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#132c2e" stop-opacity=".15"/></linearGradient>
-      <linearGradient id="lamsa-light" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".18"/><stop offset="1" stop-color="#B2A38A" stop-opacity=".08"/></linearGradient>
+      <pattern id="lamsa-mineral" width="47" height="39" patternUnits="userSpaceOnUse">
+        <path d="M2 6 l9 -3 M32 5 l9 3 M13 22 l9 -2 M35 28 l7 -2 M0 36 l7 -1" stroke="#fff" stroke-width="1.3" opacity=".26"/>
+        <path d="M6 13 l4 2 M27 14 l8 -3 M16 34 l6 -3 M39 38 l5 -1" stroke="#1D3135" stroke-width=".9" opacity=".13"/>
+        <circle cx="11" cy="30" r="2.7" fill="#F9F0E1" opacity=".20"/>
+        <circle cx="39" cy="15" r="1.8" fill="#203B3B" opacity=".10"/>
+        <circle cx="25" cy="8" r="1.5" fill="#fff" opacity=".22"/>
+      </pattern>
+      <linearGradient id="lamsa-velours" x1="0" y1="0" x2="1" y2=".7"><stop offset="0" stop-color="#fff" stop-opacity=".53"/><stop offset=".30" stop-color="#fff" stop-opacity=".24"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#132c2e" stop-opacity=".32"/></linearGradient>
+      <linearGradient id="lamsa-wall-main" x1="0" y1="0" x2="1" y2=".92"><stop offset="0" stop-color="#fff" stop-opacity=".24"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#172d33" stop-opacity=".23"/></linearGradient>
+      <linearGradient id="lamsa-wall-side" x1="0" y1=".3" x2="1" y2=".8"><stop offset="0" stop-color="#142c33" stop-opacity=".27"/><stop offset=".9" stop-color="#142c33" stop-opacity=".035"/></linearGradient>
+      <linearGradient id="lamsa-mat" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".055"/><stop offset=".70" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#1D3135" stop-opacity=".07"/></linearGradient>
+      <radialGradient id="lamsa-daylight" cx=".06" cy=".07" r=".98"><stop offset="0" stop-color="#FFFBE9" stop-opacity=".40"/><stop offset=".62" stop-color="#FFF8E2" stop-opacity=".11"/><stop offset="1" stop-color="#F5ECD6" stop-opacity="0"/></radialGradient>
+      <radialGradient id="lamsa-nightlight" cx=".73" cy=".44" r=".72"><stop offset="0" stop-color="#FFC98B" stop-opacity=".38"/><stop offset=".55" stop-color="#F8AF78" stop-opacity=".15"/><stop offset="1" stop-color="#1E3050" stop-opacity="0"/></radialGradient>
+      <linearGradient id="lamsa-room-evening" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1B2E52" stop-opacity=".34"/><stop offset=".63" stop-color="#3B3559" stop-opacity=".21"/><stop offset="1" stop-color="#5A4260" stop-opacity=".14"/></linearGradient>
       <clipPath id="lamsa-before"><rect id="beforeMask" x="0" y="0" width="0" height="650"/></clipPath>
     </defs>`;
   }
@@ -140,22 +159,38 @@
   function composeRoom(before) {
     const chosen = before ? originalWalls[state.room] : state.wallColors[state.room];
     const prefix = before ? 'avant' : 'apres';
-    const overlay = before ? 0 : state.finish === 'mineral' ? 0.75 : state.finish === 'velours' ? 0.8 : 0;
-    const overlayFill = state.finish === 'velours' ? 'url(#lamsa-velours)' : 'url(#lamsa-mineral)';
     const targetAttrs = (wall, label) => before ? 'pointer-events="none"' : `data-wall="${wall}" role="button" tabindex="0" aria-label="Peindre le ${escapeText(label)}" aria-pressed="${state.selectedWall === wall}"`;
-    const wall = (wallName, path, label) => `<path class="${before ? '' : 'wall-paint'}" d="${path}" fill="${pathSafe(chosen[wallName])}" ${targetAttrs(wallName, label)} stroke="${!before && state.selectedWall === wallName ? '#CE1E5A' : 'none'}" stroke-width="${!before && state.selectedWall === wallName ? 5 : 0}" stroke-dasharray="10 10"/><path d="${path}" fill="${overlayFill}" opacity="${overlay}" pointer-events="none"/>`;
-    const lighting = state.light === 'soir' ? '<rect x="0" y="0" width="960" height="650" fill="#303C59" opacity=".20" pointer-events="none"/>' : '<rect x="0" y="0" width="960" height="650" fill="url(#lamsa-light)" pointer-events="none"/>';
+    const wall = (wallName, path, label) => {
+      const shading = wallName === 'side' ? 'lamsa-wall-side' : 'lamsa-wall-main';
+      const finish = before ? 'mat' : state.finish;
+      const surface = finish === 'velours' ? '<path d="' + path + '" fill="url(#lamsa-velours)" opacity=".87" pointer-events="none"/>'
+        : finish === 'mineral' ? '<path d="' + path + '" fill="url(#lamsa-mineral)" opacity=".55" pointer-events="none"/><path d="' + path + '" fill="url(#lamsa-mat)" opacity=".47" pointer-events="none"/>'
+        : '<path d="' + path + '" fill="url(#lamsa-mat)" opacity=".72" pointer-events="none"/>';
+      return `<path class="${before ? '' : 'wall-paint'}" d="${path}" fill="${pathSafe(chosen[wallName])}" ${targetAttrs(wallName, label)} />
+        <path d="${path}" fill="url(#${shading})" pointer-events="none" />${surface}`;
+    };
+    const lighting = state.light === 'soir'
+      ? '<rect x="0" y="0" width="960" height="650" fill="url(#lamsa-room-evening)" pointer-events="none"/><rect x="0" y="0" width="960" height="650" fill="url(#lamsa-nightlight)" pointer-events="none"/>'
+      : '<rect x="0" y="0" width="960" height="650" fill="url(#lamsa-daylight)" pointer-events="none"/>';
+    const wallIndicator = before ? '' : `<g class="surface-indicator" pointer-events="none">
+      <circle cx="${state.selectedWall === 'main' ? 788 : 116}" cy="${state.selectedWall === 'main' ? 153 : 176}" r="21" fill="#F7F2E8" stroke="#CE1E5A" stroke-width="4"/>
+      <circle cx="${state.selectedWall === 'main' ? 788 : 116}" cy="${state.selectedWall === 'main' ? 153 : 176}" r="5" fill="#CE1E5A"/>
+    </g>`;
     return `<g data-version="${prefix}">
       <rect x="0" y="0" width="960" height="650" fill="#D6DFD9"/>
       <path d="M0 0 H960 V93 L921 88 L230 43 L0 92 Z" fill="#F8F4E8"/>
       ${wall('side', lateral, 'mur latéral')}
       ${wall('main', front, 'mur principal')}
+      ${wallIndicator}
       <path d="M0 555 L245 470 L898 502 L960 577 V650 H0 Z" fill="#D5BCA2"/>
       <path d="M0 555 L245 470 L898 502 L960 577" fill="none" stroke="#A89176" stroke-width="7"/>
       <path d="M246 474 L898 506 M243 466 L0 553" fill="none" stroke="#F8F4E8" stroke-width="9"/>
       <path d="M245 45 L245 471" stroke="#FFF9EC" stroke-width="4" opacity=".7"/>
       <path d="M195 507 L239 647 M368 479 L337 650 M533 488 L558 650 M713 495 L818 650" stroke="#BBA38C" stroke-width="1.7" opacity=".5"/>
       <path d="M0 594 L960 630" stroke="#BBA38C" stroke-width="1.7" opacity=".38"/>
+      ${state.light === 'jour' ? '<path d="M0 555 L208 490 L468 650 H177 Z" fill="#FFF6E1" opacity=".3"/>' : '<path d="M690 496 L830 507 L960 640 L885 650 Z" fill="#E6B78B" opacity=".20"/>'}
+      ${state.room === 'salon' ? '<path d="M228 547 L680 540 L846 646 L171 646 Z" fill="#E9D8BE" opacity=".32"/>' : ''}
+      ${state.room === 'chambre' ? '<path d="M327 537 L729 541 L852 647 L226 647 Z" fill="#DCC8B8" opacity=".40"/>' : ''}
       ${pictureMarkup(state.room)}
       ${furnitureMarkup(state.room)}
       ${lighting}
@@ -176,11 +211,22 @@
       line.setAttribute('x2', String(state.compare * 9.6));
       line.setAttribute('opacity', state.compare === 0 || state.compare === 100 ? '0' : '1');
     }
+    const handle = scene.querySelector('#comparisonHandle');
+    if (handle) {
+      handle.setAttribute('transform', `translate(${state.compare * 9.6} 0)`);
+      handle.style.display = state.compare === 0 || state.compare === 100 ? 'none' : '';
+    }
     compareOutput.textContent = state.compare === 0 ? 'Après · 100%' : state.compare === 100 ? 'Avant · 100%' : `Avant · ${state.compare}%`;
   }
 
   function renderScene() {
-    scene.innerHTML = `${defs()}${composeRoom(false)}<g clip-path="url(#lamsa-before)" pointer-events="none">${composeRoom(true)}</g><line id="comparisonLine" x1="0" x2="0" y1="0" y2="650" stroke="#F7F2E8" stroke-width="5" opacity="0" pointer-events="none"/>`;
+    scene.innerHTML = `${defs()}${composeRoom(false)}<g clip-path="url(#lamsa-before)" pointer-events="none">${composeRoom(true)}</g>
+      <line id="comparisonLine" x1="0" x2="0" y1="0" y2="650" stroke="#F7F2E8" stroke-width="5" opacity="0" pointer-events="none"/>
+      <g id="comparisonHandle" transform="translate(0 0)">
+        <rect id="comparisonHitArea" x="-26" y="60" width="52" height="525" fill="transparent" pointer-events="all" style="cursor:ew-resize;touch-action:none"/>
+        <circle cx="0" cy="327" r="29" fill="#F7F2E8" stroke="#1D3135" stroke-width="3" pointer-events="none"/>
+        <path d="M-14 327 H14 M-10 321 L-16 327 L-10 333 M10 321 L16 327 L10 333" fill="none" stroke="#1D3135" stroke-width="3" stroke-linecap="round" pointer-events="none"/>
+      </g>`;
     scene.setAttribute('aria-label', `${roomNames[state.room]}, deux surfaces personnalisables : mur principal et mur latéral`);
     updateComparison();
   }
@@ -199,11 +245,32 @@
     custom.value = hex;
     finishDescription.textContent = finishes[state.finish];
     for (const button of swatches.querySelectorAll('button')) button.setAttribute('aria-pressed', String(button.dataset.color === hex));
+    for (const button of harmoniesPanel?.querySelectorAll('button') ?? []) {
+      const harmony = harmonies.find((item) => item.id === button.dataset.harmony);
+      const picked = state.wallColors[state.room];
+      button.setAttribute('aria-pressed', String(harmony && harmony.main.toUpperCase() === picked.main && harmony.side.toUpperCase() === picked.side));
+    }
   }
 
   function render() { renderScene(); renderControls(); }
   function setColor(hex) { if (!validColor(hex)) return; state.wallColors[state.room][state.selectedWall] = hex.toUpperCase(); render(); showStatus(`Mur ${state.selectedWall === 'main' ? 'principal' : 'latéral'} : ${colorName.textContent}.`); }
 
+  // A one-touch harmony recolors both surfaces while preserving the room's scene.
+  if (harmoniesPanel) {
+    for (const harmony of harmonies) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'harmony-choice';
+      button.dataset.harmony = harmony.id;
+      button.setAttribute('aria-label', `Accord ${harmony.name} — ${harmony.note}`);
+      button.innerHTML = `<span class="harmony-tiles" aria-hidden="true"><i style="background:${harmony.main}"></i><i style="background:${harmony.side}"></i></span><span class="harmony-name">${harmony.name}</span>`;
+      button.addEventListener('click', () => {
+        state.wallColors[state.room] = { main: harmony.main.toUpperCase(), side: harmony.side.toUpperCase() };
+        render(); showStatus(`Accord ${harmony.name} appliqué aux deux murs du ${roomNames[state.room].toLowerCase()}.`);
+      });
+      harmoniesPanel.append(button);
+    }
+  }
   for (const color of colors) {
     const button = document.createElement('button');
     button.type = 'button';
@@ -222,6 +289,27 @@
   scene.addEventListener('keydown', (event) => { if (event.key !== 'Enter' && event.key !== ' ') return; const target = event.target.closest('[data-wall]'); if (!target) return; event.preventDefault(); state.selectedWall = target.dataset.wall; render(); scene.querySelector(`[data-wall="${state.selectedWall}"]`)?.focus(); });
   custom.addEventListener('input', () => setColor(custom.value));
   compareRange.addEventListener('input', updateComparison);
+  // The on-image split is draggable on touch and mouse; the native range remains
+  // the accessible keyboard alternative (including Arrow/Home/End keys).
+  let draggingComparison = false;
+  function setCompareAtClientX(clientX) {
+    const rect = scene.getBoundingClientRect();
+    if (!rect.width) return;
+    compareRange.value = String(Math.max(0, Math.min(100, Math.round((clientX - rect.left) * 100 / rect.width))));
+    updateComparison();
+  }
+  scene.addEventListener('pointerdown', (event) => {
+    if (!event.target.closest?.('#comparisonHitArea')) return;
+    draggingComparison = true;
+    scene.setPointerCapture(event.pointerId);
+    setCompareAtClientX(event.clientX);
+    event.preventDefault();
+  });
+  scene.addEventListener('pointermove', (event) => { if (draggingComparison) setCompareAtClientX(event.clientX); });
+  const endComparisonDrag = () => { draggingComparison = false; };
+  scene.addEventListener('pointerup', endComparisonDrag);
+  scene.addEventListener('pointercancel', endComparisonDrag);
+  scene.addEventListener('lostpointercapture', endComparisonDrag);
 
   document.querySelector('#resetBtn').addEventListener('click', () => {
     for (const name of Object.keys(defaultWalls)) state.wallColors[name] = { ...defaultWalls[name] };
