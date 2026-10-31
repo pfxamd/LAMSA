@@ -26,13 +26,13 @@
 | Phase | État | Référence | Critère de sortie |
 | --- | --- | --- | --- |
 | **01 — Brand Identity** | **Base livrée** | [Charte](brand/BRAND.md), [aperçu](brand/preview.html), [SVG](brand/lamsa-wordmark.svg) | Direction d'identité documentée avec logo vectoriel, palette et signature |
-| **02 — LAMSA LAB** | **En cours : prototype livré, finalisation à faire** | [Issue #1](https://github.com/pfxamd/LAMSA/issues/1) | Scènes, couleurs, finitions, éclairages, export et mobile revus/validés |
+| **02 — LAMSA LAB** | **Terminé : moteur et prototype contrôlés en Chromium** | [Issue #1](https://github.com/pfxamd/LAMSA/issues/1) | Scènes, couleurs, finitions, éclairages, export et mobile revus/validés |
 | **03 — Website Design & Development** | À faire | [Issue #2](https://github.com/pfxamd/LAMSA/issues/2) | Site français multi-pages, identité forte, parcours de navigation réel |
 | **04 — Commercial Features** | À faire | [Issue #3](https://github.com/pfxamd/LAMSA/issues/3) | Services, réalisations, devis et parcours commercial fonctionnels |
 | **05 — Quality Assurance** | À faire | [Issue #4](https://github.com/pfxamd/LAMSA/issues/4) | Vérifications visuelles et techniques documentées, pas de défaut critique |
 | **06 — Launch & Case Study** | À faire | [Issue #5](https://github.com/pfxamd/LAMSA/issues/5) | Lien public réellement vérifié + présentation du Concept sur PFXAMD |
 
-**Progression suivie par jalons : 1 phase de base livrée sur 6 ; la phase 02 est active.** Ce ratio n'est pas un pourcentage de code achevé.
+**Progression suivie par jalons : 2 phases livrées sur 6 ; la phase 03 est la prochaine.** Ce ratio n'est pas un pourcentage de code achevé.
 
 ## Livrables déjà présents dans GitHub
 
@@ -49,10 +49,13 @@
 - 3 décors SVG : salon, chambre, boutique.
 - 2 murs indépendants par scène.
 - 12 couleurs prédéfinies et sélection libre.
-- 3 finitions indicatives (mat, velours, minérale).
-- 2 ambiances (jour, soir), comparaison avant/après.
-- Export de la configuration en PNG **1440 × 975** et partage par lien.
+- 3 finitions indicatives (mat, velours, minérale), avec ombres et éclairages révisés.
+- 2 ambiances (jour, soir), comparaison avant/après au curseur ou par glissement direct de la césure.
+- 4 accords de couleurs coordonnés pour les deux murs.
+- Export propre de la configuration en PNG **1440 × 975** et partage par lien, avec restauration des paramètres.
 - Utilisation souris / tactile / clavier, responsive ; sans données personnelles ni chargement de photo.
+
+**Vérification de la phase 02 :** [rapport de recette locale](tests/PHASE2.md). 90 combinaisons testées en Chromium sur 5 largeurs (tactile émulé et clavier compris). Pas de validation Firefox/Safari ou d'appareil physique à ce stade : tests réservés à la phase 05.
 
 **Limite explicite :** les pièces sont des dessins 2D et les effets sont indicatifs, non photoréalistes ni une correspondance colorimétrique certifiée.
 
@@ -60,11 +63,13 @@
 
 - [`815346f9`](https://github.com/pfxamd/LAMSA/commit/815346f9fd9aad36af65c2370d894c4434609bf7) — première direction de marque, charte et SVG.
 - [`01201751`](https://github.com/pfxamd/LAMSA/commit/01201751c6a1b68e2ffd812cd24290ee3ac917f1) — prototype LAB, interface française et documentation.
+- [`27732564`](https://github.com/pfxamd/LAMSA/commit/2773256445329d765277ae711f92f447f0cd7692) — finitions, lumières, harmonies et césure tactile.
+- [`0fc8b488`](https://github.com/pfxamd/LAMSA/commit/0fc8b4883996de617ffc3c0bad8bc3e553d4852f) — correctifs de comparaison et d'export, tests de régression reproductibles.
 - Les tâches de finition et développement sont suivies dans les [Issues](https://github.com/pfxamd/LAMSA/issues).
 
 ## Prochaine action unique
 
-**Terminer l'[Issue #1 — Finaliser LAMSA LAB](https://github.com/pfxamd/LAMSA/issues/1).** Examiner le rendu des pièces et des finitions, vérifier les interactions sur téléphone et ordinateur, corriger les défauts et n'ouvrir la phase 03 qu'après validation.
+**Phase 03 — Construire le site français complet : [Issue #2](https://github.com/pfxamd/LAMSA/issues/2).** Conserver le LAMSA LAB validé et bâtir les pages commerciales autour de l'identité La Césure. Les vérifications Safari/Firefox et les tests sur appareils physiques relèvent de la phase 05.
 
 ## Règles de suivi
 
