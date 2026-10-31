@@ -14,7 +14,7 @@
 | Positionnement | Entreprise locale générale, accessible et professionnelle |
 | Langue de tout le site | **Français uniquement** |
 | Création | Identité, scénographie et interactions originales par **PFXAMD** |
-| Direction graphique actuelle | **La Césure** — marque vectorielle, césure décalée, palette Pétrole / Framboise / Enduit / Glacis |
+| Direction graphique actuelle | **Living Surfaces — validée** : entreprise de peinture et décoration, murs et intérieurs habités, navigation douce, aucune composition de magazine ni numérotation décorative. [Charte actuelle](DESIGN_DIRECTION.md). « La Césure » demeure une origine historique du logotype. |
 | Expérience majeure | **LAMSA LAB** sur pièces prédéfinies conçues par nos soins |
 | Entrées interdites | **Aucun upload de photo** : ni image de pièce, ni image personnelle |
 | Contraintes techniques | Site léger et statique ; aucune dépendance à un service payant, pas de 3D ni WebGL |
@@ -40,7 +40,7 @@
 - [`brand/preview.html`](brand/preview.html) — planche de marque responsive.
 - [`brand/lamsa-wordmark.svg`](brand/lamsa-wordmark.svg) et [`brand/lamsa-symbol.svg`](brand/lamsa-symbol.svg) — graphismes vectoriels originaux, plus variantes.
 - [`brand/tokens.css`](brand/tokens.css) — palette et variables.
-- [`index.html`](index.html) — page d’accueil, avec illustration de surface à 4 ambiances interactives.
+- [`index.html`](index.html) — page d’accueil sous la direction Living Surfaces, avec changement d'ambiance/coloris de mur et compositions d'intérieurs.
 - [`lab/lab.js`](lab/lab.js) et [`lab/lab.css`](lab/lab.css) — moteur interactif sans serveur ni upload.
 - [`lab/README.md`](lab/README.md) — documentation des capacités et limites.
 
@@ -62,7 +62,7 @@
 ## Livraison de la phase 03
 
 - Pages réelles : [`Accueil`](index.html), [`Services`](services/), [`Réalisations`](realisations/), [`À propos`](a-propos/), [`LAMSA LAB`](lab/) et [`Devis`](devis/).
-- Identité La Césure, navigation et pied de page communs, illustrations géométriques codées et interactions locales.
+- Direction **Living Surfaces** pour les six pages : navigation douce, intérieurs concrets, présentation commerciale et interactions locales. Les codes éditoriaux et la numérotation ont été abandonnés.
 - LAB phase 02 préservé sans modifier son moteur ; accessible par une route dédiée.
 - Devis : récapitulatif copiable **sans envoi** (intégration commerciale en phase 04).
 - [Contrôles de structure de la phase 03](tests/PHASE3.md) — 6 pages, liens internes, éléments sémantiques et syntaxe du JavaScript. Vérification visuelle multi-navigateurs **non accomplie**, prévue en phase 05.
@@ -83,6 +83,6 @@
 
 1. Maintenir cette page quand une phase change d'état ; ne pas marquer « terminé » sans livrable et vérification.
 2. Cocher les critères dans l'Issue correspondante au fur et à mesure des validations.
-3. Préserver la fonctionnalité LAB et la charte sauf décision de redesign.
+3. Préserver la fonctionnalité LAB et la direction web officiellement validée dans [`DESIGN_DIRECTION.md`](DESIGN_DIRECTION.md). Une évolution technique ne justifie pas de restaurer l'ancien langage éditorial ; un changement de direction requiert une demande explicite du propriétaire.
 4. Ne pas confondre code dans GitHub, test local et publication accessible au public.
 5. Ne pas créer de nouvelles pages de démonstration sans utilité ; l'objectif est **un seul produit final commercial convaincant**.
