@@ -4,11 +4,17 @@
   const header = document.querySelector('.topbar');
   const toggle = header?.querySelector('.menu-toggle');
   const nav = header?.querySelector('.topbar-nav');
+  if (header) {
+    const updateScrolled = () => header.classList.toggle('is-scrolled', window.scrollY > 6);
+    updateScrolled();
+    window.addEventListener('scroll', updateScrolled, { passive: true });
+  }
   if (header && toggle && nav) {
-    const close = () => { header.classList.remove('menu-open'); toggle.setAttribute('aria-expanded', 'false'); };
+    const close = () => { header.classList.remove('menu-open'); toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', 'Ouvrir le menu'); };
     toggle.addEventListener('click', () => {
       const open = header.classList.toggle('menu-open');
       toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
     });
     nav.addEventListener('click', event => { if (event.target.closest('a')) close(); });
     document.addEventListener('keydown', event => { if (event.key === 'Escape') close(); });

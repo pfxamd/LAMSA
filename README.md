@@ -2,7 +2,7 @@
 
 **LAMSA — Donnez vie à vos espaces.**
 
-Concept PFXAMD d'un site de peinture, décoration et finitions à Tétouan. Site en français, identité originale « La Césure », sans dépendances externes ou service payant.
+Concept PFXAMD d'un site de peinture, décoration et finitions à Tétouan. Site en français, direction visuelle « Living Surfaces », sans dépendances externes ou service payant.
 
 ## Pages
 
@@ -38,3 +38,7 @@ Consulter [`ROADMAP.md`](ROADMAP.md) et les [GitHub Issues](https://github.com/p
 - [LAMSA LAB, phase 02](lab/README.md)
 - [Tests réalisés pour la phase 02](tests/PHASE2.md)
 - [Livraison et vérifications structurelles de la phase 03](tests/PHASE3.md)
+
+## Direction visuelle actuelle
+
+Voir [DESIGN_DIRECTION.md](DESIGN_DIRECTION.md). Le site adopte une interface chaleureuse et tangible inspirée des surfaces peintes et des intérieurs habités. Le précédent style éditorial, les numéros de sections et les éléments imitant les magazines sont abandonnés. Le laboratoire et les comparateurs restent fonctionnels.
