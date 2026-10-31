@@ -145,3 +145,27 @@ a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}b
     border-width:4px;box-shadow:0 0 0 7px #f3e9d9 inset,5px 8px 13px rgba(24,38,38,.2);
   }
 }
+
+
+/* Boutique / Pétrole — real photographed counter in place of the schematic block.
+   One independent layer remains the SAME on both sides of the color comparison. */
+.case-visual .study-shot[data-study="boutique"] > .study-counter-stage{
+  position:absolute;inset:0;z-index:2;pointer-events:none;
+}
+.case-visual .study-counter-stage picture{
+  display:block;position:absolute;width:63%;left:23%;bottom:4.5%;
+}
+.case-visual .study-counter{
+  display:block;width:100%;height:auto;object-fit:contain;
+  filter:drop-shadow(0 3px 4px rgba(37,31,27,.15));
+}
+.case-visual .study-counter-shadow{
+  position:absolute;left:25%;bottom:4.3%;width:61%;height:9%;
+  background:radial-gradient(ellipse at 50% 52%,rgba(54,40,28,.42) 0%,rgba(54,40,28,.18) 49%,transparent 78%);
+  filter:blur(9px);
+}
+.case-visual .study-shot[data-study="boutique"] > .wipe-line{z-index:3}
+@media(max-width:450px){
+  .case-visual .study-counter-stage picture{width:78%;left:12%;bottom:7%}
+  .case-visual .study-counter-shadow{left:14%;width:73%;bottom:6.5%}
+}
