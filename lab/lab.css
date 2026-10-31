@@ -15,11 +15,26 @@
 .harmony-tiles{height:31px;display:grid;grid-template-columns:2fr 1fr;transform:skewX(-9deg);overflow:hidden}
 .harmony-tiles i{display:block}
 .harmony-name{font-size:10px;font-weight:650;overflow-wrap:anywhere}
-.scene-frame:has(#comparisonHandle:not([style*="display: none"])) .scene-legend{opacity:.35}
+.scene-frame .scene-legend{opacity:.96}
 @media(min-width:880px) and (max-width:1060px){.harmonies{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.harmonies{gap:8px}.harmony-choice{min-height:64px;padding:6px}.harmony-tiles{height:30px}.harmony-name{font-size:10px}}
 @media(prefers-reduced-motion:reduce){.harmony-choice{transition:none}}
 
 /* Selection is indicated by the precision pin, not a distracting dashed perimeter. */
 .wall-paint[aria-pressed="true"]{stroke:color-mix(in srgb,var(--lamsa-signature) 24%,transparent);stroke-width:2;stroke-dasharray:none}
-.wall-paint:is(:hover,:focus){stroke:var(--lamsa-signature);stroke-width:4;stroke-dasharray:12 10}
+.wall-paint:focus-visible{stroke:var(--lamsa-signature);stroke-width:4;stroke-dasharray:12 10}
+@media(hover:hover) and (pointer:fine){.wall-paint:hover{stroke:var(--lamsa-signature);stroke-width:3;stroke-dasharray:12 10}}
+
+/* Comparison handle remains discoverable at both ends of the seam. */
+#comparisonHitArea{cursor:ew-resize;touch-action:none}
+
+/* Architectural color index: use remaining desktop preview space to show the
+ * two currently painted surfaces instead of a decorative empty gutter. */
+.wall-summary{display:grid;grid-template-columns:1fr 1fr;flex:1;min-height:97px;max-height:155px;border-top:1px solid #A8B9B5;background:#E6EBE6}
+.wall-summary-item{display:flex;align-items:center;gap:13px;padding:16px clamp(12px,1.8vw,28px);min-width:0}
+.wall-summary-item+.wall-summary-item{border-left:1px solid #A8B9B5}
+.wall-summary-index{font:700 10px/1.45 ui-monospace,monospace;letter-spacing:.055em;color:#51686B}
+.wall-summary-chip{display:block;flex:1;height:36px;min-width:30px;max-width:190px;border:1px solid #17393C24;box-shadow:inset 0 -8px 15px #152c2d16}
+.wall-summary-item strong{font:700 11px ui-monospace,monospace;white-space:nowrap}
+@media(max-width:1170px){.wall-summary-item{gap:8px;padding:12px}.wall-summary-index{font-size:9px}.wall-summary-chip{min-width:18px}.wall-summary-item strong{font-size:10px}}
+@media(max-width:880px){.wall-summary{display:none}}

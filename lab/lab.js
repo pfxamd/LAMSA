@@ -164,7 +164,7 @@
       const shading = wallName === 'side' ? 'lamsa-wall-side' : 'lamsa-wall-main';
       const finish = before ? 'mat' : state.finish;
       const surface = finish === 'velours' ? '<path d="' + path + '" fill="url(#lamsa-velours)" opacity=".87" pointer-events="none"/>'
-        : finish === 'mineral' ? '<path d="' + path + '" fill="url(#lamsa-mineral)" opacity=".55" pointer-events="none"/><path d="' + path + '" fill="url(#lamsa-mat)" opacity=".47" pointer-events="none"/>'
+        : finish === 'mineral' ? '<path d="' + path + '" fill="url(#lamsa-mineral)" opacity=".24" pointer-events="none"/><path d="' + path + '" fill="url(#lamsa-mat)" opacity=".47" pointer-events="none"/>'
         : '<path d="' + path + '" fill="url(#lamsa-mat)" opacity=".72" pointer-events="none"/>';
       return `<path class="${before ? '' : 'wall-paint'}" d="${path}" fill="${pathSafe(chosen[wallName])}" ${targetAttrs(wallName, label)} />
         <path d="${path}" fill="url(#${shading})" pointer-events="none" />${surface}`;
@@ -213,8 +213,7 @@
     }
     const handle = scene.querySelector('#comparisonHandle');
     if (handle) {
-      handle.setAttribute('transform', `translate(${state.compare * 9.6} 0)`);
-      handle.style.display = state.compare === 0 || state.compare === 100 ? 'none' : '';
+      handle.setAttribute('transform', `translate(${Math.max(32, Math.min(928, state.compare * 9.6))} 0)`);
     }
     compareOutput.textContent = state.compare === 0 ? 'Après · 100%' : state.compare === 100 ? 'Avant · 100%' : `Avant · ${state.compare}%`;
   }
@@ -222,9 +221,9 @@
   function renderScene() {
     scene.innerHTML = `${defs()}${composeRoom(false)}<g clip-path="url(#lamsa-before)" pointer-events="none">${composeRoom(true)}</g>
       <line id="comparisonLine" x1="0" x2="0" y1="0" y2="650" stroke="#F7F2E8" stroke-width="5" opacity="0" pointer-events="none"/>
-      <g id="comparisonHandle" transform="translate(0 0)">
-        <rect id="comparisonHitArea" x="-26" y="60" width="52" height="525" fill="transparent" pointer-events="all" style="cursor:ew-resize;touch-action:none"/>
-        <circle cx="0" cy="327" r="29" fill="#F7F2E8" stroke="#1D3135" stroke-width="3" pointer-events="none"/>
+      <g id="comparisonHandle" transform="translate(0 0)" aria-hidden="true">
+        <rect id="comparisonHitArea" x="-42" y="60" width="84" height="525" fill="transparent" pointer-events="all" style="cursor:ew-resize;touch-action:none"/>
+        <circle cx="0" cy="327" r="32" fill="#F7F2E8" stroke="#1D3135" stroke-width="3" pointer-events="none"/>
         <path d="M-14 327 H14 M-10 321 L-16 327 L-10 333 M10 321 L16 327 L10 333" fill="none" stroke="#1D3135" stroke-width="3" stroke-linecap="round" pointer-events="none"/>
       </g>`;
     scene.setAttribute('aria-label', `${roomNames[state.room]}, deux surfaces personnalisables : mur principal et mur latéral`);
@@ -238,6 +237,13 @@
     for (const button of document.querySelectorAll('[data-wall-button]')) button.setAttribute('aria-pressed', String(button.dataset.wallButton === state.selectedWall));
     for (const button of document.querySelectorAll('[data-finish]')) button.setAttribute('aria-pressed', String(button.dataset.finish === state.finish));
     for (const button of document.querySelectorAll('[data-light]')) button.setAttribute('aria-pressed', String(button.dataset.light === state.light));
+    const walls = state.wallColors[state.room];
+    for (const [which, name] of [['main', 'Main'], ['side', 'Side']]) {
+      const sample = document.querySelector(`#visual${name}Sample`);
+      const code = document.querySelector(`#visual${name}Color`);
+      if (sample) sample.style.backgroundColor = walls[which];
+      if (code) code.textContent = walls[which];
+    }
     const hex = selectedHex();
     const match = colors.find(({ hex: known }) => hex === known.toUpperCase());
     colorName.textContent = match ? match.name : 'Nuance personnelle';
@@ -314,12 +320,18 @@
   document.querySelector('#resetBtn').addEventListener('click', () => {
     for (const name of Object.keys(defaultWalls)) state.wallColors[name] = { ...defaultWalls[name] };
     state.room = 'salon'; state.selectedWall = 'main'; state.finish = 'mat'; state.light = 'jour'; compareRange.value = '0';
-    render(); showStatus('Atelier réinitialisé.');
+    render();
+    if (window.location.protocol === 'https:' || window.location.protocol === 'http:') {
+      const url = new URL(window.location.href);
+      ['piece', 'mur', 'finition', 'lumiere', ...Object.keys(roomNames).flatMap((name) => [`${name}_main`, `${name}_side`])]
+        .forEach((key) => url.searchParams.delete(key));
+      window.history.replaceState(null, '', url);
+    }
+    showStatus('Atelier réinitialisé.');
   });
 
   function shareUrl() {
     const url = new URL(window.location.href);
-    url.search = '';
     url.searchParams.set('piece', state.room);
     url.searchParams.set('mur', state.selectedWall);
     url.searchParams.set('finition', state.finish);
@@ -344,6 +356,8 @@
       // A snapshot records the final painted room, not the comparison overlay.
       clone.querySelector('[clip-path="url(#lamsa-before)"]')?.remove();
       clone.querySelector('#comparisonLine')?.remove();
+      clone.querySelector('#comparisonHandle')?.remove();
+      clone.querySelectorAll('.surface-indicator').forEach((item) => item.remove());
       clone.querySelectorAll('[data-wall]').forEach((wall) => {
         wall.removeAttribute('stroke'); wall.removeAttribute('stroke-width'); wall.removeAttribute('stroke-dasharray'); wall.removeAttribute('class'); wall.removeAttribute('role'); wall.removeAttribute('tabindex'); wall.removeAttribute('aria-pressed');
       });
@@ -358,6 +372,23 @@
         const canvas = document.createElement('canvas'); canvas.width = 1440; canvas.height = 975;
         const context = canvas.getContext('2d'); if (!context) throw new Error('Canvas non disponible');
         context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        // Consistent brand panel, with exact color codes, on a clean export.
+        context.fillStyle = '#1D3135';
+        context.fillRect(0, 900, 1440, 75);
+        context.fillStyle = '#F7F2E8';
+        context.font = 'bold 30px Arial, sans-serif';
+        context.fillText('LAMSA', 32, 950);
+        context.font = '18px Arial, sans-serif';
+        context.fillText(`${roomNames[state.room]}  /  ${state.finish === 'mineral' ? 'Minérale' : state.finish === 'velours' ? 'Velours' : 'Mat'}  /  ${state.light === 'soir' ? 'Soir' : 'Jour'}`, 205, 948);
+        const walls = state.wallColors[state.room];
+        for (const [index, name] of ['main', 'side'].entries()) {
+          const x = 875 + index * 260;
+          context.fillStyle = walls[name];
+          context.fillRect(x, 920, 36, 36);
+          context.fillStyle = '#F7F2E8';
+          context.font = 'bold 18px Arial, sans-serif';
+          context.fillText(walls[name], x + 46, 944);
+        }
         const png = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
         if (!png) throw new Error('Export PNG indisponible');
         const pngUrl = URL.createObjectURL(png);
