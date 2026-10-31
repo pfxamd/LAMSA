@@ -34,3 +34,29 @@ a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}b
 .lab-page .lab-head h1 em{font-style:normal;color:var(--lamsa-signature)}
 @media(max-width:600px){.lab-page .lab-head h1{font-size:clamp(52px,11.4vw,75px)}}
 .case-visual .before-layer .study-shot{height:100%;min-height:0;border:0}
+
+
+/* Réalisations / Salon — one real furnishing across both sides of the color study.
+   A single cutout is deliberately above the color wipe so the sofa cannot jump
+   or change between avant and après. The shadow belongs to the room, not the asset. */
+.case-visual .study-shot[data-study="salon"] > .study-sofa-stage{
+  position:absolute;inset:0;z-index:2;pointer-events:none;
+}
+.case-visual .study-sofa-stage picture{
+  display:block;position:absolute;width:72%;left:16.5%;bottom:10%;
+}
+.case-visual .study-sofa{
+  display:block;width:100%;height:auto;object-fit:contain;
+  filter:drop-shadow(0 3px 2px rgba(34,43,39,.14));
+}
+.case-visual .study-sofa-shadow{
+  position:absolute;left:22%;bottom:9.6%;width:64%;height:13%;
+  background:radial-gradient(ellipse at 50% 48%,rgba(45,37,30,.44) 0%,rgba(45,37,30,.23) 38%,transparent 75%);
+  filter:blur(11px);transform:rotate(-1deg);
+}
+.case-visual .study-shot[data-study="salon"] > .wipe-line{z-index:3}
+/* A large sofa remains fully inside the scene even at the narrowest phone width. */
+@media(max-width:450px){
+  .case-visual .study-sofa-stage picture{width:81%;left:10%;bottom:11%}
+  .case-visual .study-sofa-shadow{left:15%;width:75%;bottom:10%}
+}
