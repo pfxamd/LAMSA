@@ -46,6 +46,16 @@ def run():
                 assert split.fragment in scan.ids,(name,'unresolved anchor',resource)
             count+=1
         print(f'{name}: structure + {len(parser.resources)} ressources internes OK')
+    # Every realisation uses exactly one shared furniture layer, outside the
+    # before/after mask. This prevents the former counter cropping regression.
+    studies=(ROOT/'realisations/index.html').read_text(encoding='utf-8')
+    for scene in ('salon','boutique','chambre'):
+        section=studies.split(f'<article id="{scene}"',1)[1].split('</article>',1)[0]
+        assert section.count('study-furniture-stage')==1, (scene,'furniture stage')
+        assert section.count('study-furniture-media')==1, (scene,'furniture media')
+        assert 'study-object' not in section, (scene,'old geometric placeholder')
+        assert section.index('before-layer') < section.index('study-furniture-stage') < section.index('wipe-line'), (scene,'incorrect comparison layering')
+    print('3 études : mobilier unique et comparaison préservés')
     print(f'{len(ROUTES)} routes, {count} ressources internes valides')
 
 if __name__=='__main__':
