@@ -2,18 +2,24 @@
 
 **LAMSA — Donnez vie à vos espaces.**
 
-Concept de marque et futur site en français pour une entreprise de peinture, décoration et finitions à Tétouan (Maroc). Identité originale conçue par PFXAMD.
+Concept original PFXAMD d’une entreprise de peinture, décoration et finitions à Tétouan (Maroc). Identité et interface en français.
 
-## État
+## Réalisé
 
-Identité de marque — direction créative initiale. Pas encore de site web de production.
-
+- [Prototype interactif de LAMSA LAB](index.html) — trois scènes architecturales intégrées, personnalisation des murs, couleurs, finitions, lumière, comparaison et export PNG.
 - [Plateau de présentation de l’identité](brand/preview.html)
 - [Charte de marque](brand/BRAND.md)
-- [Logotype vectoriel](brand/lamsa-wordmark.svg)
-- [Symbole vectoriel](brand/lamsa-symbol.svg)
-- [Variables de couleur](brand/tokens.css)
+- [Logotype vectoriel](brand/lamsa-wordmark.svg), [symbole](brand/lamsa-symbol.svg) et [tokens](brand/tokens.css)
+- [Documentation technique du LAB](lab/README.md)
 
-## Cap produit envisagé
+## Lancer en local
 
-Site de services + LAMSA LAB, un laboratoire interactif de couleurs et finitions sur scènes prédéfinies. Aucun téléchargement de photo utilisateur.
+```sh
+python3 -m http.server 8000
+```
+
+Ouvrir `http://localhost:8000/`. Aucun téléchargement de modèle, base de données, serveur applicatif, service payant ou étape de compilation nécessaire.
+
+## Portée actuelle
+
+Fondation de marque et prototype fonctionnel LAMSA LAB. **Ce dépôt n’est pas encore un site commercial complet** : les pages Services, Réalisations, À propos et Devis restent à construire. Les scènes sont des illustrations 2D, et non une promesse de correspondance exacte avec une peinture réelle. Aucune photo utilisateur n’est demandée.

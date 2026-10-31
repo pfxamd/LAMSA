@@ -45,8 +45,33 @@ Pas de dégradés multicolores, d'arcs-en-ciel ou de palettes de peintures utili
 - Descripteur : **Peinture · Décoration · Finitions**.
 - Phrase d'accueil possible : **Une nouvelle vie pour vos murs.**
 
-## Déclinaison digitale — à développer après validation
+## Application web / Direction 01
 
-La **césure** deviendra un masque de révélation dans LAMSA LAB : surfaces existantes et surfaces transformées se répondent. Le laboratoire utilisera des pièces de démonstration prédéfinies, sans upload de photos personnelles.
+Le prototype interactif [LAMSA LAB](../index.html) applique les mêmes proportions, couleurs et motifs. **La césure** fonctionne comme un masque avant/après sur les surfaces : ce n’est pas un simple effet décoratif, mais le point d’interaction du produit.
+
+- Trois espaces démonstratifs en SVG : salon, chambre, boutique.
+- Nuancier de 12 couleurs + nuance personnelle, deux surfaces indépendantes par scène.
+- Comparaison avant/après, finitions, lumière, partage, export PNG.
+- Interface mobile/desktop en français, sans photographie fournie par l’utilisateur.
+- Illustrations et textures interprétatives, jamais présentées comme un rendu colorimétrique exact.
+
+## Typographie et rythme
+
+- Le logotype est une **géométrie SVG originale**, jamais une police de substitution.
+- Titres d’exposition condensés, nets et denses ; les titres sont en capitales lorsque cela sert la hiérarchie.
+- Texte de service en caractères simples et très lisibles ; instructions courtes, francophones et concrètes.
+- Une marge nette et des séparateurs filaires suffisent : éviter les cartes à coins arrondis, les ombres et les dégradés décoratifs.
+- Les mouvements respectent `prefers-reduced-motion` et ne masquent jamais les commandes.
+
+## Couleur et lisibilité
+
+Rapports de contraste théoriques (WCAG) : Pétrole sur Enduit ≈ **12,20:1** ; Framboise sur Enduit ≈ **4,76:1** ; blanc sur Framboise ≈ **5,31:1**. Les textes de contrôle et les données utiles restent sur des combinaisons suffisamment contrastées. Les nuances du nuancier restent des exemples de peinture, **pas** des couleurs de texte.
+
+## Usage du signe
+
+- Version principale sur fond Enduit et version inverse sur Pétrole.
+- Le symbole compact sert de favicon et de repère dans les affichages étroits ; il ne remplace pas systématiquement le nom.
+- Éviter de réduire le logotype au point que la fine césure disparaisse ; conserver les versions alternatives lorsque l’impression ou la taille l’exige.
+- Aucune retouche aléatoire des écarts entre les lettres : les proportions du SVG source font partie du dessin.
 
 Cette direction est une proposition de PFXAMD, pas une validation de disponibilité juridique de la marque.
