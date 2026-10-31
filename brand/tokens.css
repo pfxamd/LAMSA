@@ -1,0 +1,10 @@
+/* LAMSA — Direction 01 / La Césure. */
+:root {
+  --lamsa-ink: #1D3135;
+  --lamsa-signature: #CE1E5A;
+  --lamsa-plaster: #F7F2E8;
+  --lamsa-glaze: #A2D7D0;
+  --lamsa-rule: #D2D5CD;
+  --lamsa-display: "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --lamsa-text: "Helvetica Neue", Arial, sans-serif;
+}

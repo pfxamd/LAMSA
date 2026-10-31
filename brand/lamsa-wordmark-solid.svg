@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 612 132" role="img" aria-label="LAMSA">
+<defs><g id="letterforms"><g fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="square" stroke-linejoin="miter">
+<path d="M21 17 V111 H97"/>
+<path d="M135 111 L171 17 L208 111 M146 80 H198"/>
+<path d="M248 111 V17 L291 69 L334 17 V111"/>
+<path d="M448 33 C434 12 381 10 373 41 C363 73 452 58 452 92 C452 122 398 130 371 104"/>
+<path d="M499 111 L536 17 L573 111 M510 80 H563"/>
+</g></g>
+<clipPath id="upper"><rect x="0" y="0" width="612" height="59"/></clipPath>
+<clipPath id="trace"><rect x="0" y="64" width="612" height="7"/></clipPath>
+<clipPath id="lower"><rect x="0" y="75" width="612" height="57"/></clipPath></defs>
+<g color="#1D3135"><use xlink:href="#letterforms" clip-path="url(#upper)"/><use xlink:href="#letterforms" x="7" clip-path="url(#lower)"/></g>
+<g color="#1D3135"><use xlink:href="#letterforms" x="-3" clip-path="url(#trace)"/></g></svg>
